@@ -142,10 +142,10 @@ class CustomNet(LatentDiffusion):
         
         with torch.no_grad():
             text = batch['txt']
-            text_embedding = self.text_encoder(text)
+            text_embedding = self.text_encoder(text)  # 文字描述（背景）
 
 
-        x, c = self.get_input(batch, self.first_stage_key)
+        x, c = self.get_input(batch, self.first_stage_key)   # 物体图片（无背景）
 
         c["c_crossattn"].append(text_embedding)
         loss = self(x, c,)
